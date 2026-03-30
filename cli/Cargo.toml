@@ -1,0 +1,16 @@
+[package]
+name = "horus-tf-cli"
+version = "0.2.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "CLI for HORUS coordinate frame inspection"
+
+[[bin]]
+name = "horus-tf"
+path = "src/main.rs"
+
+[dependencies]
+horus-tf = { path = ".." }
+horus_core = { path = "../../horus/horus_core", default-features = false }
+clap = { version = "4.0", features = ["derive"] }
+libc = "0.2"

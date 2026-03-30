@@ -1,0 +1,42 @@
+[package]
+name = "horus-tf"
+version = "0.2.0"
+edition = "2021"
+authors = ["Softmata Contributors"]
+license = "Apache-2.0"
+description = "Lock-free coordinate frame transforms. 10-33x faster than ROS2 TF2."
+repository = "https://github.com/softmata/horus-tf"
+keywords = ["transforms", "coordinate-frames", "robotics", "spatial", "lock-free"]
+categories = ["science::robotics", "data-structures", "concurrency"]
+
+[dependencies]
+# Core (required — TF uses horus error types and bytemuck re-exports)
+horus_core = { path = "../horus/horus_core", default-features = false }
+horus_macros = { path = "../horus/horus_macros" }
+
+bytemuck = { version = "1.0", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_arrays = "0.1"
+parking_lot = "0.12"
+tracing = { version = "0.1", optional = true }
+
+[features]
+default = []
+wait = []
+async-wait = ["dep:tokio"]
+tracing = ["dep:tracing"]
+
+[dependencies.tokio]
+version = "1.0"
+features = ["full"]
+optional = true
+
+[dev-dependencies]
+proptest = "1.4"
+horus_core = { path = "../horus/horus_core" }
+
+[package.metadata.horus]
+type = "plugin"
+plugin-type = "cli-extension"
+commands = ["frame", "tf"]
+entry = "horus-tf"
