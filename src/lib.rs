@@ -149,6 +149,7 @@ mod builder;
 mod config;
 mod core;
 mod messages;
+pub mod prelude;
 mod publisher;
 mod query;
 mod registry;
